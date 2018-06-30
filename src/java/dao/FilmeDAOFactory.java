@@ -17,7 +17,7 @@ import javax.persistence.PersistenceContext;
 @ApplicationScoped
 public class FilmeDAOFactory {
   
-@PersistenceContext(unitName="filmePU")
+@PersistenceContext(unitName="webMooviesPU")
 private EntityManager em;
   
 @Produces
@@ -25,4 +25,5 @@ public FilmeDAO criarFilmeDAO() {
          //Em FilmeDAOImpl(em) passamos o Entity Manager criado
 return new FilmeDAOImpl(em);
 }
+
 }
