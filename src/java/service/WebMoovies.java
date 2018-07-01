@@ -6,6 +6,7 @@
 package service;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import javax.jws.WebService;
 import javax.jws.WebMethod;
@@ -19,7 +20,15 @@ import model.Filme;
 @WebService(serviceName = "WebMoovies")
 public class WebMoovies {
     
-    List<Filme> filmes = new ArrayList<>();  
+    private List<Filme> filmes = new ArrayList<>();
+    
+    public WebMoovies(){
+        filmes.add(new Filme(1, "a", "a", "a", "a", 1));        
+        filmes.add(new Filme(2, "b", "b", "b", "b", 2));        
+        filmes.add(new Filme(3, "c", "c", "c", "c", 3));        
+        filmes.add(new Filme(4, "d", "d", "d", "d", 3));        
+        filmes.add(new Filme(5, "e", "e", "e", "e", 3));        
+    }
     
     @WebMethod(operationName = "newMovie")
     public Filme newMovie(@WebParam(name = "id") int id,
@@ -36,33 +45,67 @@ public class WebMoovies {
         filme.setGenero(gen);
         filme.setEstudio(est);
         filme.setAnoLancamento(data);
-        
+        filmes.add(filme);
         return filme;
     }
     
     @WebMethod(operationName = "getMovieTitle")
-    public String getMovieTitle(@WebParam(name = "titulo") String tit) {        
-        return "Pesquisa feita pelo título, com entrada: " + tit;
+    public List<Filme> getMovieTitle(@WebParam(name = "titulo") String tit) {
+        List<Filme> buscaFilmes = new ArrayList<>();
+        for(Filme f : filmes){
+            if(f.getTitulo().equals(tit)){
+                buscaFilmes.add(f);
+            }
+        }
+        return buscaFilmes;
     }
     
     @WebMethod(operationName = "getMovieDiretor")
-    public String getMovieDirector(@WebParam(name = "diretor") String dir) {
-        return "Pesquisa feita pelo diretor, com entrada: " + dir;
+    public List<Filme> getMovieDirector(@WebParam(name = "diretor") String dir) {
+        List<Filme> buscaFilmes = new ArrayList<>();
+        for(Filme f : filmes){
+            if(f.getDiretor().equals(dir)){
+                buscaFilmes.add(f);
+            }
+        }
+        return buscaFilmes;
     }
     
     @WebMethod(operationName = "getMovieStudio")
-    public String getMovieStudio(@WebParam(name = "estudio") String est) {
-        return "Pesquisa feita pelo estúdio, com entrada: " + est;
+    public List<Filme> getMovieStudio(@WebParam(name = "estudio") String est) {
+        List<Filme> buscaFilmes = new ArrayList<>();
+        for(Filme f : filmes){
+            if(f.getEstudio().equals(est)){
+                buscaFilmes.add(f);
+            }
+        }
+        return buscaFilmes;
     }
     
     @WebMethod(operationName = "getMovieGenre")
-    public String getMovieGenre(@WebParam(name = "genero") String gen) {
-        return "Pesquisa feita pelo genero, com entrada: " + gen;
+    public List<Filme> getMovieGenre(@WebParam(name = "genero") String gen) {
+        List<Filme> buscaFilmes = new ArrayList<>();
+        for(Filme f : filmes){
+            if(f.getGenero().equals(gen)){
+                buscaFilmes.add(f);
+            }
+        }
+        return buscaFilmes;
     }
     
     @WebMethod(operationName = "getMovieAge")
-    public String getMovieAge(@WebParam(name = "age") int age) {
-        return "Pesquisa feita pelo data de lançamento, com entrada: " + age;
+    public List<Filme> getMovieAge(@WebParam(name = "age") int age) {
+        List<Filme> buscaFilmes = new ArrayList<>();
+        for(Filme f : filmes){
+            if(f.getAnoLancamento()==age){
+                buscaFilmes.add(f);
+            }
+        }
+        return buscaFilmes;
     }
        
+    @WebMethod(operationName = "getAllMovies")
+    public List<Filme> getMovieTeste() {
+        return filmes;
+    }
 }

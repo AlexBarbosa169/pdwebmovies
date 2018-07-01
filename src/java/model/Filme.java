@@ -38,6 +38,15 @@ public class Filme implements Serializable {
     @Transient
     private int runtimeId;
 
+    public Filme(int id, String titulo, String diretor, String estudio, String genero, int anoLancamento) {
+        this.id = id;
+        this.titulo = titulo;
+        this.diretor = diretor;
+        this.estudio = estudio;
+        this.genero = genero;
+        this.anoLancamento = anoLancamento;
+    }
+
     public Filme() {
     }
 
