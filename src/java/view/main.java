@@ -5,9 +5,9 @@
  */
 package view;
 
+import controller.FilmeController;
 import dao.FilmeDAO;
-import dao.FilmeDAOFactory;
-import dao.FilmeDAOImpl;
+import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
@@ -22,34 +22,29 @@ public class main {
     /**
      * @param args the command line arguments
      */
-    public static void main(String[] args) {
+    public static void main(String[] args) throws Exception {
         // TODO code application logic here
         
-        EntityManagerFactory factory = Persistence.createEntityManagerFactory("webMooviesPU");
-        EntityManager em = factory.createEntityManager();
-  
-//        Filme f = new Filme();
-//        f.setId(1);
-//        f.setTitulo("A lagoa azul");
-//        f.setEstudio("Universal");
-//        f.setDiretor("Albert");        
-//        f.setGenero("Comédia");
-//        f.setRuntimeId(0);
-//        
-//        System.out.println(f.getTitulo());
-//        
-//        FilmeDAOFactory facDao = new FilmeDAOFactory();
-//        
-//        
-////        FilmeDAO daoFilme = facDao.criarFilmeDAO();
-//        
-//        FilmeDAO fi = facDao.criarFilmeDAO();
-//        
-//        fi.adicionarFilme(f);
+       FilmeController.inicializar();
+       
+//       FilmeController.cadastrarFilme("Batman", "Tim Burton", "Warner", "Ação", 1989);
+//       FilmeController.cadastrarFilme("Aniquiliação", "XXX", "Netflix", "Ficção", 2018);
+//       FilmeController.cadastrarFilme("Star Wars - Ameaça Fantasma", "George Lucas", "Lucas Film", "Ficção", 1999);
+    
+//         List<Filme> f = FilmeController.filmesByDiretor("Tim Burton");
+//         
+//         for(Filme fil : f){
+//             System.out.println(fil.getDiretor() + fil.getEstudio() + fil.getTitulo());
+//         }
 
-//    FilmeDAO dao = facDao.criarFilmeDAO();
-//        System.out.println(dao.getTodosFilmes());
-//                        
+//      FilmeController.atualizarFilme("Batman", "The Batman");
+      
+        FilmeController.removerFilme("The Batman");
+
+        System.out.println("Concluido!\n");
+	FilmeController.finalizar();
+        
+      
     }
     
 }

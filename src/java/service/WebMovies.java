@@ -5,6 +5,7 @@
  */
 package service;
 
+import controller.FilmeController;
 import java.util.ArrayList;
 import java.util.List;
 import javax.jws.WebService;
@@ -16,26 +17,26 @@ import model.Filme;
  *
  * @author alexs
  */
-@WebService(serviceName = "WebMoovies")
-public class WebMoovies {
+@WebService(serviceName = "WebMovies")
+public class WebMovies {
     
     List<Filme> filmes = new ArrayList<>();  
     
     @WebMethod(operationName = "newMovie")
-    public Filme newMovie(@WebParam(name = "id") int id,
+    public Filme newMovie(
                            @WebParam(name = "titulo") String tit,
                            @WebParam(name = "diretor") String dir,
                            @WebParam(name = "estudio") String est,
                            @WebParam(name = "genero") String gen,
-                           @WebParam(name = "lancamento") int data) {
+                           @WebParam(name = "lancamento") int data) throws Exception {
         Filme filme = new Filme();
-        
-        filme.setId(id);
         filme.setTitulo(tit);
         filme.setDiretor(dir);
         filme.setGenero(gen);
         filme.setEstudio(est);
         filme.setAnoLancamento(data);
+        
+        FilmeController.cadastrarFilme(tit, dir, est, gen, data);
         
         return filme;
     }

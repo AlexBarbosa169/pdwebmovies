@@ -6,8 +6,10 @@
 package model;
 
 import java.io.Serializable;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Transient;
 
@@ -21,28 +23,38 @@ public class Filme implements Serializable {
     private static final long serialVersionUID = -6580012241620579129L;
 //   título, diretor, estúdio, gênero e ano de lançamento,
     @Id
-    @GeneratedValue
-    private int id;
-
+    @GeneratedValue(strategy=GenerationType.IDENTITY)
+    private long id;
+    
+    @Column(name="TITULO")
     private String titulo;
 
+    @Column(name="DIRETOR")
     private String diretor;
 
+    @Column(name="ESTUDIO")
     private String estudio;
 
+    @Column(name="GENERO")
     private String genero;
 
+    @Column(name="ANOLANCAMENTO")
     private int anoLancamento;
-
-    //Essa anotação indica que o atributo não é persistente
-    @Transient
-    private int runtimeId;
 
     public Filme() {
     }
 
+    public Filme(String titulo, String diretor, String estudio, String genero, int anoLancamento){
+        
+        setTitulo(titulo);
+        setDiretor(diretor);
+        setEstudio(estudio);
+        setGenero(genero);
+        setAnoLancamento(anoLancamento);
+    }
+    
     //getters e setters dos atributos
-    public int getId() {
+    public long getId() {
         return this.id;
     }
 
@@ -90,14 +102,4 @@ public class Filme implements Serializable {
         this.anoLancamento = anoLancamento;
     }
     
-    
-
-    public int getRuntimeId() {
-        return this.runtimeId;
-    }
-
-    public void setRuntimeId(int runtimeId) {
-        this.runtimeId = runtimeId;
-    }
-
 }
